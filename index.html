@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title >&#128152MatchMaker for the Web&#128152</title>
+    </head>
+    <body style="background-color:violet;">
+        <h1 style="text-align: center;">&#128152MatchMaker 2021&#128152</h1>
+        <h3 style="text-align: center;">Helping Jubin find love since the creation of MatchMaker 
+            in Python.
+        </h3>
+    </br>
+        <h2 style="text-align: center;">Instructions:</h2>
+        <h3 style="text-align: center;">You will be given a series of statements that will 
+            determine if you are a good match for Jubin Joseph. Each statement will
+            be answered with answers from a drop down menu. Answers will range from strongly
+            agree to strongly disgree. Once you have finished giving your answers you should 
+            hit the "Calculate Compatibility" button. Then our wizardry will give you a 
+            Compatibility score based off of your answers.
+        </h3>
+
+    <hr>
+    <br>
+
+        <label>Pizza is very good.</label>
+        <br>
+        <select id="q1">
+            <option value="5">Strongly Agree</option>
+            <option value="4">Agree</option>
+            <option value="3">Neither agree nor disagree</option>
+            <option value="2">Disagree</option>
+            <option value="1">Strongly Disagree</option>
+        </select>
+
+    <br>
+    <br>
+
+        <label>It's nice to sleep while it's raining.</label>
+        <br>
+        <select id="q2">
+            <option value="5">Strongly Agree</option>
+            <option value="4">Agree</option>
+            <option value="3">Neither agree nor disagree</option>
+            <option value="2">Disagree</option>
+            <option value="1">Strongly Disagree</option>
+        </select>
+
+    <br>
+    <br>
+
+        <label>Indian food is very good.</label>
+        <br>
+        <select id="q3">
+            <option value="5">Strongly Agree</option>
+            <option value="4">Agree</option>
+            <option value="3">Neither agree nor disagree</option>
+            <option value="2">Disagree</option>
+            <option value="1">Strongly Disagree</option>
+        </select>
+
+    <br>
+    <br>
+
+        <label>Sports are interesting.</label>
+        <br>
+        <select id="q4">
+            <option value="5">Strongly Agree</option>
+            <option value="4">Agree</option>
+            <option value="3">Neither agree nor disagree</option>
+            <option value="2">Disagree</option>
+            <option value="1">Strongly Disagree</option>
+        </select>
+
+    <br>
+    <br>
+
+        <label>Christian theology is fun.</label>
+        <br>
+        <select id="q5">
+            <option value="5">Strongly Agree</option>
+            <option value="4">Agree</option>
+            <option value="3">Neither agree nor disagree</option>
+            <option value="2">Disagree</option>
+            <option value="1">Strongly Disagree</option>
+        </select>
+
+        <br>
+        <br>
+        <br>
+
+        <button type="button" onclick="CalcComp()">Calculate Compatibility</button>
+        <p id="Say"></p>
+
+        <p id="Stuff"></p>
+
+        <br>
+
+        <p id="q1Stuff"></p>
+
+        <p id="q2Stuff"></p>
+
+        <p id="q3Stuff"></p>
+        
+        <p id="q4Stuff"></p>
+
+        <p id="q5Stuff"></p>
+
+        <script>
+            console.log("Starting MatchMaker 2021...");
+
+            const DESIRED = [
+                4,
+                5,
+                5,
+                3,
+                2
+            ]
+
+            const WEIGHT = [
+                2,
+                2,
+                3,
+                2,
+                1
+            ]
+
+            function CalcComp(){
+                console.log("CalculateCompatibily()");
+
+                let q1Response = document.getElementById("q1").selectedOptions[0].value;
+                let q2Response = document.getElementById("q2").selectedOptions[0].value;
+                let q3Response = document.getElementById("q3").selectedOptions[0].value;
+                let q4Response = document.getElementById("q4").selectedOptions[0].value;
+                let q5Response = document.getElementById("q5").selectedOptions[0].value;
+
+                let q1Comp = 5 - Math.abs(DESIRED[0] - q1Response);
+                let q2Comp = 5 - Math.abs(DESIRED[1] - q2Response);
+                let q3Comp = 5 - Math.abs(DESIRED[2] - q3Response);
+                let q4Comp = 5 - Math.abs(DESIRED[3] - q4Response);
+                let q5Comp = 5 - Math.abs(DESIRED[4] - q5Response);
+
+                CompTotal = (q1Comp * WEIGHT[0]) + (q2Comp * WEIGHT[1]) + (q3Comp * WEIGHT[2]) + 
+                (q4Comp * WEIGHT[3]) + (q5Comp * WEIGHT[4]);
+
+                document.getElementById("Say").innerHTML = "Your Compatibility is... " + CompTotal*2 + "%";
+
+                CompTotal *= 2;
+                if (CompTotal == 100) {
+                    document.getElementById("Stuff").innerHTML = 
+                    "Heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\
+                    yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy, what's poppin? Wanna go out sometime?&#128525";
+                }else if (CompTotal > 90) {
+                    document.getElementById("Stuff").innerHTML = 
+                    "Yo, we should totally catch a movie together?&#128538";
+                }else if (CompTotal > 85) {
+                    document.getElementById("Stuff").innerHTML = 
+                    "You seem like a great person, we should be besties&#128521";
+                }else if (CompTotal > 75){
+                    document.getElementById("Stuff").innerHTML = 
+                    "I can set ya up with one of my friends perhaps&#128522";
+                }else {
+                    document.getElementById("Stuff").innerHTML = 
+                    "cringe, I mean, perhaps not&#128580";
+                }
+
+
+                if (CompTotal>85){
+                    document.body.style.backgroundColor = "deeppink"
+                }else{
+                    document.body.style.backgroundColor = "lightskyblue"
+                }
+
+                
+
+                if (CompTotal != 100){
+                    document.getElementById("q1Stuff").innerHTML = 
+                    "For question 1, the best answer you could've given is a \
+                    simple agree, pizza is great, nothing more nothing less. \
+                    This question has a weighing value of 2(The max is 3)"
+                
+                    document.getElementById("q2Stuff").innerHTML = 
+                    "The best answer to give for question 2 is Strongly Agree because I \
+                    like to sleep, but I also like to sleep in the rain. While it's \
+                    raining not sleep outside in the rain. This question has a \
+                    weighing value of 2."
+
+                    document.getElementById("q3Stuff").innerHTML = 
+                    "The best answer you can give for question 3 is Stongly Agree, \
+                    this can't be much of an opinion since my mother said that it's \
+                    just true. This question has a weighing value of 3 because this is the \
+                    one that truly matters."
+
+                    document.getElementById("q4Stuff").innerHTML = 
+                    "For question 4, the best answer was neither agree nor disagree, \
+                    because I think sports are just decent. This question has a weighing \
+                    value of 2"
+
+                    document.getElementById("q5Stuff").innerHTML = 
+                    "The best answer to give for question 5 is a disagree. That may be \
+                    mean to my Christian Theology teacher, but I wrote MatchMaker in python \
+                    while I still had my Theology midterm due so it just made sense. This \
+                    question has a weighing value of 1 because it wouldn't be too \
+                    fair if I liked a person based off of whether or not they like Theology."
+                }else{
+                    document.getElementById("q1Stuff").innerHTML = "Great Job!!!"
+                }
+
+                
+            }
+        </script>
+    </body>
+
+</html>
